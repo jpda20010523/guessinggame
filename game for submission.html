@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"/>
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+        <style>
+            label{
+                display:block;
+            }
+        </style>
+        </head>
+        <body>
+            <py-config>
+                packages = ['numpy']
+            </py-config>
+
+            <py-script>
+                import numpy as np
+                Selection = np.random.randint(0,100,) #Use randint instead of randit
+            </py-script>
+
+            <form>
+                <label for="guess">Guess:</label>
+                <input type="number" name="guess" id="guess"><!--Added type="number" for input -->
+
+                <button type="button" id="submit">Check Guess</button>
+                <label for="result"> Result:</label>
+                <div name= "result" id="result"></div>
+                <py-script>
+                    from pyscript import when, Element
+
+                    @when("click",selector="#submit")
+                    def check_guess(event):
+                        user_guess = int(Element("guess").value)
+                        result = Element("result")
+
+                        if user_guess == Selection:
+                            result.write("Congratulations! You guessed correctly.")
+                        elif user_guess > Selection:
+                            result.write("Try again! Your guess was to high.")
+                        else:
+                            result.write("Try again! Your guess was too low.")
+                </py-script>   
+            </form>
+        </body>
+</html> 
+
